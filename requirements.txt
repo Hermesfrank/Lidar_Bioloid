@@ -1,0 +1,4 @@
+# grove.py>=0.6
+# pyserial==3.0
+# adafruit-blinka>=6.18.0
+# aafruit-circuitpython-dotstar>=2.1.1

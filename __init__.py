@@ -5,6 +5,7 @@
 from .Motions import *
 from .LEDs import *
 from .LIDAR import *
+import sys
 
 
 # SETUP FACE
@@ -26,28 +27,38 @@ while True:
     if dist < 10: # Sees something less than 10 inches in front.
 
         stop()
+        sleep(.5)
+        stop() # make sure it stops
         sleep(1)
 
-        back()
+        back() # get some maneuvering room
         sleep(2)
+        stop()
 
-        right()
+        right() # check right
         sleep(2)
-
         stop()
         R = read_sensor()
         print("Right distance is " + R)
 
-        left()
+        left() # check left
         sleep(4)
         stop()
         L = read_sensor()
         print("Left distance is " + L)
 
-        if L <= R: # If more room right, turn back and go in that direction
+        if L <= R: # if more room right, turn back and go in that direction
             right()
             sleep(4)
+            stop()
+            sleep(.5)
             forward()
 
     else:
-        forward() # Move in the left direction
+        forward() # otherwise, move in the left direction
+
+
+    if dist < 2: # if too close, or if you want to halt operation
+        stop()
+        sleep(.5)
+        sys.exit("Got too close so quitting")
